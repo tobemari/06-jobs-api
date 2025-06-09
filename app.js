@@ -23,6 +23,8 @@ const jobsRouter = require('./routes/jobs')
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
+app.use(express.static("public"));
+
 app.set('trust proxy', 1)
 app.use(
   rateLimit({
@@ -42,6 +44,12 @@ app.use('/api/v1/jobs',authenticateUser, jobsRouter)
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
+
+// app.get("/", (req, res) => {
+//   res.send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>');
+// });
+
+
 
 const port = process.env.PORT || 3000;
 
